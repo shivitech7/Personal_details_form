@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="form_container">
+        
+        <form class="form" id="form" action="#">
+            <h1>Personal Details Form</h1>
+
+            <div class="card">
+
+                <label for="fname">Name:</label><br>
+                <div class="inputBox">
+                    <input type="text" id="fname" name="fname" placeholder="Enter your full name.." autocomplete="off"
+                        onkeyup="name_validation()" required><br>
+                </div>
+                <span class="span_tag" id="message"></span><br>
+
+                <label for="mobilenum">Mobile number:</label><br>
+                <div style="display: flex; flex-direction: row; justify-content: center;" class="inputBox">
+                    <input type="text" id="mobilenum" name="mobilenum" onkeyup="mobile_validation()" maxlength="12"
+                        placeholder="Enter your mobile number..">
+                    <span><img alt="operator" id="logo" src="sim.jpg" /></span>
+                    <span class="state" style="color: black;" id="state"></span><br>
+                </div>
+                <span id="mobileMessage"></span><br>
+
+                <div class="inputBox">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="Enter your email.."
+                        onkeyup="email_validation()" autocomplete="off">
+                </div>
+                <span id="email_error"></span>
+
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+        // Email validation
+        function email_validation() {
+            var email = document.getElementById('email').value;
+            var email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if (!email.match(email_regex)) {
+                email_error.innerHTML = "Enter valid email.."
+            } else {
+                email_error.innerHTML = ""
+            }
+        }
+
+        // Mobile number validations
+        function mobile_validation() {
+            var mobilenum = document.getElementById('mobilenum').value;
+            var mobileNumPattern = /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}/;
+
+            //Sim operator logo value
+            var logo = document.getElementById('logo');
+
+            //Convert mobilenum to string value
+            var value = mobilenum.toString();
+
+            if (value == "") {
+                mobileMessage.innerHTML = "Enter mobile number.."
+            } else {
+                if (!mobilenum.match(mobileNumPattern)) {
+                    mobileMessage.innerHTML = "Enter valid number!"
+                } else {
+                    mobileMessage.innerHTML = ""
+                }
+            }
+
+            // To get first 3 digits of the mobile number
+            var strVal1 = value[0] + value[1] + value[2];
+            var first_3_digits = parseInt(strVal1);
+            // console.log('first: ' + first_3_digits);
+
+            // To get second 3 digits of the mobile number
+            var strVal2 = value[4] + value[5] + value[6];
+            var second_3_digits = parseInt(strVal2);
+            // console.log('second: ' + second_3_digits); 
+
+            if (first_3_digits >= 621 && first_3_digits <= 799) {
+                console.log("reliance jio");
+                const company = 'reliance jio'
+                logo.src = "reliancejioLogo.jpeg"
+                stateCode(company, parseInt(value[4]));
+            } else {
+                if (first_3_digits >= 801 && first_3_digits <= 920) {
+                    // console.log("idea", parseInt(value[4]));
+                    const company = 'idea'
+                    logo.src = "ideaLogo.png"                     //Set sim operator logo according to first 3 digits.
+                    stateCode(company, parseInt(value[4]));
+                } else {
+                    if (first_3_digits >= 921 && first_3_digits <= 999) {
+                        // console.log('vodaphone', parseInt(value[4]));
+                        const company = 'vodaphone'
+                        logo.src = "vodaphoneLogo.jpeg";
+                        stateCode(company, parseInt(value[4]));
+                    }
+                }
+            }
+        }
+
+        //Function for getting state name and operator name.
+        function stateCode(company, code) {
+            switch (code) {
+                case 1: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 2: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Andhra Pradesh`;
+                    break;
+                }
+                case 3: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+
+                    break;
+                }
+                case 4: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+
+                    break;
+                }
+                case 5: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 6: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 7: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 8: {
+                    console.log(company, 'Andhra Pradesh');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 9: {
+                    console.log(company, 'Haryana');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 10: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 11: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 12: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 13: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 14: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 15: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 16: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 17: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 18: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 19: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 20: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 21: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 22: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 23: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 24: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 25: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 26: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 27: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 28: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 29: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 30: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 31: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 32: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 33: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 34: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 35: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+                case 36: {
+                    console.log(company, 'Rajasthan');
+                    state.innerHTML = `${company}, Rajasthan`;
+                    break;
+                }
+            }
+
+        }
+
+        function name_validation() {
+
+            var name = document.getElementById('fname').value;
+
+            //To check if characters are equal to or more than 4 or not.
+            //Here name_check[0] name_check[1] represents each words in name.
+            var name_check = name.split(/(\s+)/);
+
+            //To check if the name contains 2 or more words or not
+            var pattern = /(\w.+\s).+/;
+
+            if (name == "") {
+                message.innerHTML = "Name is required!"
+            } else {
+                if (!name.match(pattern) || name_check[0].length < 4) {
+                    message.innerHTML = "Name must have at least 2 words with only alphabets and space."
+                } else {
+                    message.innerHTML = ""
+                }
+            }
+
+
+
+
+        }
+    </script>
+</body>
+
+</html>
